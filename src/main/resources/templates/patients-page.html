@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>HMS - Patients</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f0f2f5; margin: 0; }
+        .navbar { background: #2c3e50; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; }
+        .navbar a { color: white; text-decoration: none; }
+        .content { padding: 30px; max-width: 900px; margin: 0 auto; }
+        .card { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { text-align: left; padding: 10px; border-bottom: 1px solid #eee; }
+        th { background: #f8f9fa; }
+        input { padding: 8px; margin: 5px 5px 5px 0; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 8px 16px; background: #2c7be5; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h2>HMS - Patients</h2>
+        <a href="/dashboard">Back to Dashboard</a>
+    </div>
+    <div class="content">
+        <div class="card">
+            <h3>Add New Patient</h3>
+            <form th:action="@{/patients-page/add}" method="post">
+                <input type="text" name="name" placeholder="Full Name" required><br>
+                <input type="number" name="age" placeholder="Age" required>
+                <input type="text" name="gender" placeholder="Gender" required>
+                <input type="text" name="phone" placeholder="Phone" required>
+                <input type="text" name="address" placeholder="Address" required><br>
+                <button type="submit">Add Patient</button>
+            </form>
+        </div>
+        <div class="card">
+            <h3>All Patients</h3>
+            <table>
+                <tr>
+                    <th>ID</th><th>Name</th><th>Age</th><th>Gender</th><th>Phone</th><th>Address</th>
+                </tr>
+                <tr th:each="patient : ${patients}">
+                    <td th:text="${patient.id}"></td>
+                    <td th:text="${patient.name}"></td>
+                    <td th:text="${patient.age}"></td>
+                    <td th:text="${patient.gender}"></td>
+                    <td th:text="${patient.phone}"></td>
+                    <td th:text="${patient.address}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

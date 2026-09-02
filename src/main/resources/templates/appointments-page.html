@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>HMS - Appointments</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f0f2f5; margin: 0; }
+        .navbar { background: #2c3e50; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; }
+        .navbar a { color: white; text-decoration: none; }
+        .content { padding: 30px; max-width: 900px; margin: 0 auto; }
+        .card { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { text-align: left; padding: 10px; border-bottom: 1px solid #eee; }
+        th { background: #f8f9fa; }
+        input, select { padding: 8px; margin: 5px 5px 5px 0; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 8px 16px; background: #2c7be5; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h2>HMS - Appointments</h2>
+        <a href="/dashboard">Back to Dashboard</a>
+    </div>
+    <div class="content">
+        <div class="card">
+            <h3>Book New Appointment</h3>
+            <form th:action="@{/appointments-page/add}" method="post">
+                <select name="patientId" required>
+                    <option value="">-- Select Patient --</option>
+                    <option th:each="p : ${patients}" th:value="${p.id}" th:text="${p.name}"></option>
+                </select>
+                <select name="doctorId" required>
+                    <option value="">-- Select Doctor --</option>
+                    <option th:each="d : ${doctors}" th:value="${d.id}" th:text="${d.name}"></option>
+                </select><br>
+                <input type="date" name="appointmentDate" required>
+                <input type="time" name="appointmentTime" required><br>
+                <button type="submit">Book Appointment</button>
+            </form>
+        </div>
+        <div class="card">
+            <h3>All Appointments</h3>
+            <table>
+                <tr><th>ID</th><th>Patient</th><th>Doctor</th><th>Date</th><th>Time</th><th>Status</th></tr>
+                <tr th:each="a : ${appointments}">
+                    <td th:text="${a.id}"></td>
+                    <td th:text="${a.patient.name}"></td>
+                    <td th:text="${a.doctor.name}"></td>
+                    <td th:text="${a.appointmentDate}"></td>
+                    <td th:text="${a.appointmentTime}"></td>
+                    <td th:text="${a.status}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
