@@ -13,7 +13,7 @@
 <body>
     <div class="navbar">
         <h2>HMS Dashboard</h2>
-        <span>Welcome, <span th:text="${user.fullName}"></span> (<span th:text="${user.role}"></span>)</span>
+        <span>Welcome<span th:if="${user != null}">, <span th:text="${user.fullName}"></span> (<span th:text="${user.role}"></span>)</span></span>
     </div>
     <div class="content">
         <div class="card"><a href="/patients-page">Manage Patients</a></div>
