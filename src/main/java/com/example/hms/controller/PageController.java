@@ -47,6 +47,11 @@ public class PageController {
         return "redirect:/login";
     }
 
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login";
+    }
+
     @PostMapping("/login")
     public String handleLogin(@RequestParam String username, @RequestParam String password, Model model) {
         Optional<User> userOpt = userRepository.findAll().stream()
