@@ -42,9 +42,9 @@ public class PageController {
     }
 
     // ---- Auth ----
-    @GetMapping("/login")
-    public String loginPage() {
-        return "login";
+    @GetMapping("/")
+    public String rootPage() {
+        return "redirect:/login";
     }
 
     @PostMapping("/login")
